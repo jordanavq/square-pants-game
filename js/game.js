@@ -4,32 +4,16 @@ const ctx = canvas.getContext("2d");
 const cWidth = canvas.width;
 const cHeight = canvas.height;
 
-/* 
-function clearCanvas() {
-    ctx.clearRect (0,0,cWidth,cHeight);
-};
-
-function
-
-
-const draw = (x,y,w,h,color) => {
-    ctx.fillStyle = color;
-    ctx.fillRect (x,y,w,h);
-}
-
-draw(20, 40, 60, 100, 'orange'); */
-
 class SpongeBob {
   constructor() {
     this.x = 25; //posição x do Bob Esponja
     this.y = 25; //posição y do Bob Esponja
-    const img = new Image();
-    img.addEventListener("load", () => {
-      this.img = img;
+    const imgG = new Image();
+    imgG.src = "/images/spongebob.png";
+    imgG.addEventListener("load", () => {
+      this.img = imgG;
       this.draw();
     });
-
-    img.src = "/images/spongebob.png";
   }
 
   draw() {
@@ -56,11 +40,11 @@ class SpongeBob {
 
 const spongeBob = new SpongeBob();
 
-function updateCanvas() {
+/* function updateCanvas() {
   ctx.clearRect(0, 0, cWidth, cHeight);
   spongeBob.draw();
   requestAnimationFrame(updateCanvas);
-}
+} */
 
 document.addEventListener("keydown", (e) => {
   switch (e.keyCode) {
@@ -81,5 +65,42 @@ document.addEventListener("keydown", (e) => {
       console.log("right", spongeBob);
       break;
   }
-  updateCanvas();
 });
+
+//Criando o backgroungd
+
+const img = new Image();
+img.src = "../images/pineapplehouse.png";
+const backgroundImage = {
+  img: img,
+  x: 0,
+  speed: -1,
+
+  move: function () {
+    this.x += this.speed;
+    this.x %= canvas.width;
+  },
+
+  draw: function () {
+    ctx.drawImage(this.img, this.x, 0);
+    if (this.speed < 0) {
+      ctx.drawImage(this.img, this.x + canvas.width, 0);
+    } else {
+      ctx.drawImage(this.img, this.x - this.img.width, 0);
+    }
+  },
+};
+
+function updateCanvas() {
+  backgroundImage.move();
+
+  ctx.clearRect(0, 0, canvas.cWidth, canvas.height);
+  backgroundImage.draw();
+
+  spongeBob.draw();
+
+  requestAnimationFrame(updateCanvas);
+}
+
+// start calling updateCanvas when the image is loaded
+img.onload = updateCanvas;
