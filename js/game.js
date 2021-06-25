@@ -9,7 +9,7 @@ class SpongeBob {
     this.x = 25; //posição x do Bob Esponja
     this.y = 25; //posição y do Bob Esponja
     const imgG = new Image();
-    imgG.src = "/images/spongebob.png";
+    imgG.src = "../images/spongebob8.png";
     imgG.addEventListener("load", () => {
       this.img = imgG;
       this.draw();
@@ -22,7 +22,9 @@ class SpongeBob {
 
   //Sponge Bob moviments
   moveUp() {
-    this.y -= 25;
+    if (this.y > 0) {
+      this.y -= 25;
+    }
   }
 
   moveDown() {
@@ -32,19 +34,14 @@ class SpongeBob {
   moveRight() {
     this.x += 25;
   }
-
   moveLeft() {
-    this.x -= 25;
+    if (this.x > 0) {
+      this.x -= 25;
+    }
   }
 }
 
 const spongeBob = new SpongeBob();
-
-/* function updateCanvas() {
-  ctx.clearRect(0, 0, cWidth, cHeight);
-  spongeBob.draw();
-  requestAnimationFrame(updateCanvas);
-} */
 
 document.addEventListener("keydown", (e) => {
   switch (e.keyCode) {
@@ -67,10 +64,10 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-//Criando o backgroungd
+//Creating o backgroungd
 
 const img = new Image();
-img.src = "../images/pineapplehouse.png";
+img.src = "../images/backgroundImage.png";
 const backgroundImage = {
   img: img,
   x: 0,
@@ -91,6 +88,9 @@ const backgroundImage = {
   },
 };
 
+// start calling updateCanvas when the image is loaded
+img.onload = updateCanvas;
+
 function updateCanvas() {
   backgroundImage.move();
 
@@ -101,6 +101,4 @@ function updateCanvas() {
 
   requestAnimationFrame(updateCanvas);
 }
-
-// start calling updateCanvas when the image is loaded
-img.onload = updateCanvas;
+updateCanvas();
