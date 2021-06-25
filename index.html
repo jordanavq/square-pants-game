@@ -8,7 +8,23 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
-    <canvas id="canvas" width="800" height="600"></canvas>
-    <script src="./js/game.js"></script>
+    <div class="game-intro">
+      <img
+        src="./images/spongebob8.png"
+        alt="logo name game"
+        class="logo-img"
+      />
+      <br />
+      <button id="start-button">Star</button>
+      <p>
+        Use arrow keys to control Sponge Bob!<br />
+        Sponge Bob is hungry! You should eat 15 burguers and <br />
+        avoid sea ​​urchin. Oh, you have 20 seconds to feed Sponge Bob!
+      </p>
+    </div>
+    <div id="game-board">
+      <canvas id="canvas" width="800" height="600"></canvas>
+    </div>
+    <script type="text/javascript" src="./js/game2.js"></script>
   </body>
 </html>
