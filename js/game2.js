@@ -84,16 +84,24 @@ window.onload = () => {
       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
     moveLeft() {
-      this.x -= this.speed;
+      if (this.x > 0) {
+        this.x -= this.speed;
+      }
     }
     moveRight() {
-      this.x += this.speed;
+      if (this.x < canvas.width - this.width) {
+        this.x += this.speed;
+      }
     }
     moveUp() {
-      this.y -= this.speed;
+      if (this.y > 0) {
+        this.y -= this.speed;
+      }
     }
     moveDown() {
-      this.y += this.speed;
+      if (this.y < canvas.height - this.height) {
+        this.y += this.speed;
+      }
     }
   }
 
