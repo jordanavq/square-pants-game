@@ -42,6 +42,7 @@ window.onload = () => {
     background.draw();
     background.move();
     player.draw();
+
     animationId = requestAnimationFrame(updateCanvas);
   }
 
@@ -118,36 +119,79 @@ window.onload = () => {
 
   const player = new SpongeBob("../images/spongebob1.png", 25, 200, 80, 100);
 
-  /* class Obstacle {
-    constructor (source, y) {
-      
-      this.size = 40;
-      this.x = this.canvas.width + this.size/2;
+  class Obstacle {
+    constructor(y) {
+      this.x = 0;
       this.y = y;
-      this.speed = 3;
-      this.direction = -2;
-      
-
-      const img = new Image();
-      img.src = source;
-      img.onload = () => {
-        this.img = img;
-      };
-
-      draw() {
-        ctx.drawImage(this.img, this.x, this.y, this.size, this.size);
+      this.width = 40;
+      this.height = 40;
     }
-      move() {
-        this.x += this.direction * this.speed;
-        
-      }
-    } 
-    const obstacles = [];
-    function createObstacle{
-      
-      this.size = 40;
-      this.x = Math.random()this.canvas.width + this.size/2;
-      this.y = y;
 
-    } */
+    createObstacle() {
+      this.imgO = new Image();
+      this.imgO.src = "../images/sea-urchin-9.png";
+      //img.onload = () => {
+      //this.imgO = imgO;
+      //};
+      ctx.drawImage(this.imgO, this.x, this.y, this.width, this.height);
+    }
+
+    createBurguers() {
+      this.imgB = new Image();
+      this.imgB.src = "../images/burguer.png";
+      ctx.drawImage(
+        this.imgB,
+        this.x,
+        this.y,
+        this.width + 50,
+        this.height + 50
+      );
+    }
+
+    moveObstacles() {
+      this.x -= 5;
+    }
+    left() {
+      return this.x;
+    }
+    right() {
+      return this.x + this.width;
+    }
+    top() {
+      return this.y;
+    }
+    bottom() {
+      return this.y + this.height;
+    }
+  }
+
+  const frames = 0;
+  const seaUrchin = [];
+  const lifes = 2;
+  const burguer = [];
+
+  // Para criar novos obstáculos, guardando no array e movimentar
+  function createObstaclesArr() {
+    frames += 1;
+    if (lifes < 15) {
+      if (frames % 50 === 0) {
+        seaUrchin.push(
+          new Obstacle(Math.floor(Math.random() * (canvas.height - 25)))
+        );
+      }
+    } else if (lifes >= 15) {
+      if (frames % 35 === 0) {
+        seaUrchin.push(
+          new Obstacle(Math.floor(Math.random() * (canvas.height - 25)))
+        );
+      }
+    }
+    if (frames % 150 === 0) {
+      setTimeout(function () {
+        burguer.push(
+          new Obstacle(Math.floor(Math.random() * (canvas.height - 25)))
+        );
+      }, 2000);
+    }
+  }
 };
