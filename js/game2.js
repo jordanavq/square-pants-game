@@ -1,7 +1,5 @@
 //Botão start
-console.log("hello2");
 window.onload = () => {
-  console.log("hello");
   document.getElementById("start-button").onclick = () => {
     startGame();
   };
@@ -51,15 +49,7 @@ function updateCanvas() {
   background.draw();
   background.move();
   player.draw();
-  //seaUrchin.drawObstacle();
-  //seaUrchin.moveObstacles();
-  //burguer.drawBurguers();
-  //burguer.moveObstacles();
   updateObstacles();
-
-  //this.moveObjectsArr();
-  //this.createObjectsArr();
-
   animationId = requestAnimationFrame(updateCanvas);
 }
 
@@ -164,7 +154,7 @@ class Objects {
 
 let frames = 0;
 const seaUrchins = [];
-//const burguers = [];
+const burguers = [];
 
 updateObstacles = () => {
   frames++;
@@ -183,5 +173,21 @@ updateObstacles = () => {
     );
 
     seaUrchins.push(seaUrchin);
+  }
+
+  for (let i = 0; i < burguers.length; i++) {
+    if (frames > 1500 && frames < 2500) {
+      burguers[i].speed = 10;
+    }
+    burguers[i].drawObstacle();
+    burguers[i].moveObstacle();
+  }
+  if (frames % 120 === 0) {
+    const burguer = new Objects(
+      "../images/burguer.png",
+      Math.floor(Math.random() * 500)
+    );
+
+    burguers.push(burguer);
   }
 };
