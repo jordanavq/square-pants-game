@@ -1,9 +1,13 @@
 //Botão start
+
 window.onload = () => {
   document.getElementById("start-button").onclick = () => {
     startGame();
+
+    document.getElementById("start-button").removeEventListener("onclick");
   };
 };
+console.log("teste");
 
 //botões para movimentar o
 document.addEventListener("keydown", (e) => {
@@ -28,10 +32,17 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+//Game audio:
+const gameSound = new Audio();
+gameSound.src = "../sounds/spongeBobMusic.mp3";
+gameSound.volume = 0.2;
+
+const scoreElement = document.getElementById("score");
+
 function startGame() {
-  console.log("cliquei");
   updateCanvas();
 }
+
 //Canvas
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -43,16 +54,55 @@ function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+function stopGame() {
+  cancelAnimationFrame(animationId);
+}
+
+function gameOver() {
+  clearCanvas();
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "yellow";
+  ctx.font = "50px 'Verdana'";
+  ctx.fillText("Game Over", 220, 300);
+
+  ctx.font = "100px";
+  ctx.fillStyle = "white";
+  ctx.fillText(`Your Final Score: ${score} `, 290, 350);
+
+  gameSound.pause();
+}
+
+function score1() {
+  ctx.font = "50px";
+  ctx.fillStyle = "white";
+  ctx.fillText(`Score: ${score}`, 600, 40);
+}
+
 function updateCanvas() {
-  console.log("update");
+  showScore();
+  gameSound.play();
   clearCanvas();
   background.draw();
   background.move();
   player.draw();
-  updateObstacles();
-  animationId = requestAnimationFrame(updateCanvas);
+  score1();
+  const crash = updateObstacles();
+  if (crash && collisions >= 2) {
+    console.log(collisions, crash);
+
+    stopGame();
+    gameOver();
+    collisions = 0;
+    score = 0;
+  } else {
+    animationId = requestAnimationFrame(updateCanvas);
+  }
 }
 
+function showScore() {
+  scoreElement.innerText = score;
+}
 class Background {
   constructor(source) {
     this.x = 0;
@@ -87,7 +137,7 @@ class SpongeBob {
     this.y = y;
     this.width = w;
     this.height = h;
-    this.speed = 10;
+    this.speed = 12;
 
     const img = new Image();
     img.src = source;
@@ -98,6 +148,7 @@ class SpongeBob {
   draw() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
+
   moveLeft() {
     if (this.x > 0) {
       this.x -= this.speed;
@@ -118,6 +169,28 @@ class SpongeBob {
       this.y += this.speed;
     }
   }
+
+  left() {
+    return this.x;
+  }
+  right() {
+    return this.x + this.width;
+  }
+  top() {
+    return this.y;
+  }
+  bottom() {
+    return this.y + this.height;
+  }
+
+  checkCollision(Obstacle) {
+    return !(
+      this.top() > Obstacle.bottom() ||
+      this.bottom() < Obstacle.top() ||
+      this.left() > Obstacle.right() ||
+      this.right() < Obstacle.left()
+    );
+  }
 }
 
 const player = new SpongeBob("../images/spongebob1.png", 25, 200, 80, 100);
@@ -126,15 +199,15 @@ class Objects {
   constructor(source, y) {
     this.x = canvas.width;
     this.y = y;
-    this.width = 40;
-    this.height = 40;
-    this.speed = 6;
+    this.width = 50;
+    this.height = 50;
+    this.speed = 5;
 
     const img = new Image();
     img.src = source;
-    img.onload = () => {
-      this.img = img;
-    };
+    //img.onload = () => {
+    this.img = img;
+    //};
   }
 
   drawObstacle() {
@@ -142,31 +215,53 @@ class Objects {
   }
 
   drawBurguer() {
-    ctx.drawImage(this.img, this.x, this.y, this.width + 20, this.height + 20);
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   moveObstacle() {
     this.x -= this.speed;
   }
+
+  left() {
+    return this.x;
+  }
+  right() {
+    return this.x + this.width;
+  }
+  top() {
+    return this.y;
+  }
+  bottom() {
+    return this.y + this.height;
+  }
 }
-//const seaUrchin = new Objects("../images/sea-urchin-9.png", 200);
-//const burguer = new Objects("../images/burguer.png", 300);
 
 let frames = 0;
+let score = 0;
+let collisions = 0;
 const seaUrchins = [];
 const burguers = [];
 
 updateObstacles = () => {
   frames++;
-  console.log(seaUrchins);
+
   for (let i = 0; i < seaUrchins.length; i++) {
-    if (frames > 1500 && frames < 2500) {
+    if (frames > 2000) {
       seaUrchins[i].speed = 10;
     }
     seaUrchins[i].drawObstacle();
     seaUrchins[i].moveObstacle();
+    if (seaUrchins[i].x <= 0) {
+      //sempre que o obstáculo chegar ao final da tela, remove o 1º elemento do array.
+      seaUrchins.shift();
+    }
+    if (player.checkCollision(seaUrchins[i])) {
+      seaUrchins.splice(i, 1);
+      collisions += 1;
+      return true;
+    }
   }
-  if (frames % 120 === 0) {
+  if (frames % 60 === 0) {
     const seaUrchin = new Objects(
       "../images/sea-urchin-9.png",
       Math.floor(Math.random() * 500)
@@ -176,13 +271,21 @@ updateObstacles = () => {
   }
 
   for (let i = 0; i < burguers.length; i++) {
-    if (frames > 1500 && frames < 2500) {
+    if (frames > 2000) {
       burguers[i].speed = 10;
     }
-    burguers[i].drawObstacle();
+    burguers[i].drawBurguer();
     burguers[i].moveObstacle();
+    if (burguers[i].x > canvas.width) {
+      //sempre que o obstáculo chegar ao final da tela, remove o 1º elemento do array.
+      burguers.shift();
+    }
+    if (player.checkCollision(burguers[i])) {
+      burguers.splice(i, 1);
+      score += 1;
+    }
   }
-  if (frames % 120 === 0) {
+  if (frames % 80 === 0) {
     const burguer = new Objects(
       "../images/burguer.png",
       Math.floor(Math.random() * 500)
