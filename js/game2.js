@@ -7,9 +7,8 @@ window.onload = () => {
     //document.getElementById("start-button").removeEventListener("onclick");
   };
 };
-console.log("teste");
 
-//botões para movimentar o
+//botões para movimentar o Bob Esponja
 document.addEventListener("keydown", (e) => {
   //console.log(e) P/ ver o keycode
 
@@ -34,7 +33,7 @@ document.addEventListener("keydown", (e) => {
 
 //Game audio:
 const gameSound = new Audio();
-gameSound.src = "../sounds/spongeBobMusic.mp3";
+gameSound.src = "../sounds/SpongeBobMusic.mp3";
 gameSound.volume = 0.2;
 
 const scoreElement = document.getElementById("score");
