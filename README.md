@@ -14,7 +14,7 @@ O jogador acumulará pontos ao comer os hambúrgueres. Mas cuidado com os ouriç
 
 ## **Link do jogo**
 
-teste
+Clique [AQUI](https://jordanavq.github.io/square-pants-game/) para jogar!
 
 ## **Link da apresentação**
 
@@ -30,7 +30,7 @@ teste
 
 ## **Game Link**
 
-teste
+Click [HERE](https://jordanavq.github.io/square-pants-game/) to play!
 
 ## **Presentation link**
 
