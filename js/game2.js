@@ -33,7 +33,7 @@ document.addEventListener("keydown", (e) => {
 
 //Game audio:
 const gameSound = new Audio();
-gameSound.src = "../sounds/SpongeBobMusic.mp3";
+gameSound.src = "./sounds/SpongeBobMusic.mp3";
 gameSound.volume = 0.2;
 
 const scoreElement = document.getElementById("score");
@@ -192,7 +192,7 @@ class SpongeBob {
   }
 }
 
-const player = new SpongeBob("../images/spongebob1.png", 25, 200, 80, 100);
+const player = new SpongeBob("./images/spongebob1.png", 25, 200, 80, 100);
 
 class Objects {
   constructor(source, y) {
@@ -262,7 +262,7 @@ updateObstacles = () => {
   }
   if (frames % 60 === 0) {
     const seaUrchin = new Objects(
-      "../images/sea-urchin-9.png",
+      "./images/sea-urchin-9.png",
       Math.floor(Math.random() * 500)
     );
 
@@ -286,7 +286,7 @@ updateObstacles = () => {
   }
   if (frames % 80 === 0) {
     const burguer = new Objects(
-      "../images/burguer.png",
+      "./images/burguer.png",
       Math.floor(Math.random() * 500)
     );
 
