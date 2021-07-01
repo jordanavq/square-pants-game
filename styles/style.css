@@ -6,12 +6,15 @@ body {
 }
 
 .bg {
-  background-image: url("bg-main.jpg");
+  background-image: url("../images/1755.jpg");
+
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .game-intro {
   float: left;
-  padding: 0% 10%;
+  padding: 0%;
 }
 
 .game-intro p {
@@ -20,11 +23,7 @@ body {
 }
 
 .logo-img {
-  width: 350px;
-}
-
-.arrows-img {
-  width: 150px;
+  width: 300px;
 }
 
 body button {
@@ -39,6 +38,5 @@ body button {
 }
 
 #game-board {
-  float: left;
-  padding: 20px 0px;
+  float: none;
 }
