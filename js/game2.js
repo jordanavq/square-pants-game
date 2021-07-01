@@ -39,11 +39,11 @@ gameOverSound.src = "./sounds/failMusic.mp3";
 gameOverSound.volume = 0.2;
 
 const burgerSound = new Audio();
-burgerSound.src = "../sounds/eat_burger_sound.mp3";
+burgerSound.src = "./sounds/eat_burger_sound.mp3";
 burgerSound.volume = 0.2;
 
 const crashSound = new Audio();
-crashSound.src = "../sounds/oh_no.mp3";
+crashSound.src = "./sounds/oh_no.mp3";
 crashSound.volume = 0.2;
 
 const scoreElement = document.getElementById("score");
