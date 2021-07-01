@@ -3,8 +3,6 @@
 window.onload = () => {
   document.getElementById("start-button").onclick = () => {
     startGame();
-
-    document.getElementById("start-button").removeEventListener("onclick");
   };
 };
 
@@ -36,10 +34,21 @@ const gameSound = new Audio();
 gameSound.src = "./sounds/SpongeBobMusic.mp3";
 gameSound.volume = 0.2;
 
+const gameOverSound = new Audio();
+gameOverSound.src = "../sounds/failMusic.mp3";
+gameOverSound.volume = 0.1;
+
+const bu
+
 const scoreElement = document.getElementById("score");
+const intro = document.querySelector(".game-intro");
+const board = document.getElementById("game-board");
+const gameOver1 = document.querySelector(".game-over");
 
 function startGame() {
   updateCanvas();
+  intro.style.display = "none";
+  board.style.display = "block";
 }
 
 //Canvas
@@ -55,43 +64,55 @@ function clearCanvas() {
 
 function stopGame() {
   cancelAnimationFrame(animationId);
+  gameSound.pause();
+  gameOverSound.play();
 }
 
 function gameOver() {
-  clearCanvas();
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "yellow";
-  ctx.font = "50px 'Verdana'";
-  ctx.fillText("Game Over", 220, 300);
+  //clearCanvas();
+  gameOver1.style.display = "block";
+  document.getElementById("score").innerText = score;
+  board.style.display = "none";
+  document.getElementById("restart-button").onclick = () => {
+    gameOver1.style.display = "none";
+    intro.style.display = "block";
+  };
+  //ctx.fillStyle = "black";
+  //ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.font = "100px";
-  ctx.fillStyle = "white";
-  ctx.fillText(`Your Final Score: ${score} `, 290, 350);
+  //ctx.fillStyle = "yellow";
+  //ctx.font = "50px 'Verdana'";
+  //ctx.fillText("Game Over", 220, 300);
 
-  gameSound.pause();
+  //ctx.font = "100px";
+  //ctx.fillStyle = "white";
+  //ctx.fillText(`Your Final Score: ${score} `, 290, 350);
 }
 
-function score1() {
-  ctx.font = "50px";
-  ctx.fillStyle = "white";
-  ctx.fillText(`Score: ${score}`, 600, 40);
+function updateScore() {
+  ctx.font = "30px 'verdana'";
+  ctx.fillStyle = "yellow";
+  ctx.fillText(`Score: ${score}`, 80, 40);
+}
+function showScore() {
+  scoreElement.innerText = score;
 }
 
 function updateCanvas() {
+  clearCanvas();
   showScore();
   gameSound.play();
-  clearCanvas();
   background.draw();
   background.move();
   player.draw();
-  score1();
+  updateScore();
   const crash = updateObstacles();
   if (crash && collisions >= 2) {
     console.log(collisions, crash);
 
     stopGame();
     gameOver();
+
     collisions = 0;
     score = 0;
   } else {
@@ -99,9 +120,6 @@ function updateCanvas() {
   }
 }
 
-function showScore() {
-  scoreElement.innerText = score;
-}
 class Background {
   constructor(source) {
     this.x = 0;
