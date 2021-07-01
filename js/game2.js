@@ -35,10 +35,16 @@ gameSound.src = "./sounds/SpongeBobMusic.mp3";
 gameSound.volume = 0.2;
 
 const gameOverSound = new Audio();
-gameOverSound.src = "../sounds/failMusic.mp3";
-gameOverSound.volume = 0.1;
+gameOverSound.src = "./sounds/failMusic.mp3";
+gameOverSound.volume = 0.2;
 
-const bu
+const burgerSound = new Audio();
+burgerSound.src = "../sounds/eat_burger_sound.mp3";
+burgerSound.volume = 0.2;
+
+const crashSound = new Audio();
+crashSound.src = "../sounds/oh_no.mp3";
+crashSound.volume = 0.2;
 
 const scoreElement = document.getElementById("score");
 const intro = document.querySelector(".game-intro");
@@ -275,6 +281,7 @@ updateObstacles = () => {
     if (player.checkCollision(seaUrchins[i])) {
       seaUrchins.splice(i, 1);
       collisions += 1;
+      crashSound.play();
       return true;
     }
   }
@@ -300,6 +307,7 @@ updateObstacles = () => {
     if (player.checkCollision(burguers[i])) {
       burguers.splice(i, 1);
       score += 1;
+      burgerSound.play();
     }
   }
   if (frames % 80 === 0) {
