@@ -14,7 +14,7 @@ O jogador acumulará pontos ao comer os hambúrgueres.
 
 Cuidado com os ouriços do mar! Se você encostar em dois deles, o jogo terminará, e o Bob Esponja ficará com fome.
 
-Let´s play!
+_Let´s play!_
 
 ## **Link do jogo**
 
