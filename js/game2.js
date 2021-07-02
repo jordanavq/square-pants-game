@@ -72,6 +72,7 @@ function stopGame() {
   cancelAnimationFrame(animationId);
   gameSound.pause();
   gameOverSound.play();
+  gameSound.currentTime = 0;
 }
 
 function gameOver() {
