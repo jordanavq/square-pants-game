@@ -3,7 +3,7 @@ body {
   flex-direction: column;
   text-align: center;
   align-items: center;
-  background-image: url("../images/18124637.jpg");
+  background-image: url("../images/M5Aa0001Marineland003.jpg");
   width: 100%;
   height: 100vh;
   background-repeat: no-repeat;
@@ -89,10 +89,25 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+  animation: bouncingTitle 1.5s infinite alternate;
 }
 
 #game-board {
   display: none;
   align-items: center;
   padding: 10px 0px;
+}
+
+#game-title h1 {
+}
+
+@keyframes bouncingTitle {
+  from {
+    transform: translateY(0px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
 }

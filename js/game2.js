@@ -51,17 +51,17 @@ const intro = document.querySelector(".game-intro");
 const board = document.getElementById("game-board");
 const gameOver1 = document.querySelector(".game-over");
 
-function startGame() {
-  updateCanvas();
-  intro.style.display = "none";
-  board.style.display = "block";
-}
-
 //Canvas
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 let animationId = null;
+
+function startGame() {
+  updateCanvas();
+  intro.style.display = "none";
+  board.style.display = "block";
+}
 
 //Função updateCanvas=>limpa o canvas e desenha
 function clearCanvas() {
@@ -83,16 +83,6 @@ function gameOver() {
     gameOver1.style.display = "none";
     intro.style.display = "block";
   };
-  //ctx.fillStyle = "black";
-  //ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  //ctx.fillStyle = "yellow";
-  //ctx.font = "50px 'Verdana'";
-  //ctx.fillText("Game Over", 220, 300);
-
-  //ctx.font = "100px";
-  //ctx.fillStyle = "white";
-  //ctx.fillText(`Your Final Score: ${score} `, 290, 350);
 }
 
 function updateScore() {
@@ -121,6 +111,7 @@ function updateCanvas() {
 
     collisions = 0;
     score = 0;
+    frames = 0;
   } else {
     animationId = requestAnimationFrame(updateCanvas);
   }
@@ -130,7 +121,7 @@ class Background {
   constructor(source) {
     this.x = 0;
     this.y = 0;
-    this.speed = -1;
+    this.speed = -2;
 
     const img = new Image();
     img.src = source;
