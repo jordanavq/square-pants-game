@@ -3,7 +3,7 @@ body {
   flex-direction: column;
   text-align: center;
   align-items: center;
-  background-image: url("../images/M5Aa0001Marineland003.jpg");
+  background-image: url("../images/18124637.jpg");
   width: 100%;
   height: 100vh;
   background-repeat: no-repeat;
@@ -20,15 +20,15 @@ body {
   justify-content: space-between;
   padding: 0% 10%;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #f2f2e1;
+  color: #ffd700;
 }
 
-.game-intro h1 {
+/* .game-intro h1 {
   color: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 35px;
   margin-bottom: 0;
-}
+} */
 
 .game-intro ul {
   display: flex;
@@ -70,23 +70,23 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bolder;
   background: none;
-  color: yellow;
+  color: #ffd700;
   padding: 20px 40px;
 }
 
 .logo-img {
-  width: 300px;
+  width: 700px;
 }
 
 body button {
-  font-size: 70px;
+  font-size: 40px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bolder;
   background: none;
-  color: #ffd700;
+  color: #f2f2e1;
   padding: 20px 40px;
   border: 0;
-  box-shadow: 0;
+  box-shadow: -3px 5px 10px rgba(235, 243, 239, 0.404);
   border-radius: 5px;
   margin-bottom: 20px;
   animation: bouncingTitle 1.5s infinite alternate;
@@ -96,9 +96,6 @@ body button {
   display: none;
   align-items: center;
   padding: 10px 0px;
-}
-
-#game-title h1 {
 }
 
 @keyframes bouncingTitle {
