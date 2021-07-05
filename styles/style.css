@@ -23,13 +23,6 @@ body {
   color: #ffd700;
 }
 
-/* .game-intro h1 {
-  color: white;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 35px;
-  margin-bottom: 0;
-} */
-
 .game-intro ul {
   display: flex;
   list-style-type: none;
@@ -53,7 +46,7 @@ body {
 }
 
 .game-over h2 {
-  color: #20424d;
+  color: #ffd700;
   font-size: 90px;
   margin-bottom: 0;
 }
@@ -70,23 +63,23 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bolder;
   background: none;
-  color: #ffd700;
+  color: #fc3903;
   padding: 20px 40px;
 }
 
 .logo-img {
-  width: 700px;
+  width: 800px;
 }
 
 body button {
-  font-size: 40px;
+  font-size: 60px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bolder;
   background: none;
-  color: #f2f2e1;
+  color: #fc3903;
   padding: 20px 40px;
   border: 0;
-  box-shadow: -3px 5px 10px rgba(235, 243, 239, 0.404);
+  box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
   animation: bouncingTitle 1.5s infinite alternate;
