@@ -287,7 +287,7 @@ updateObstacles = () => {
   }
 
   for (let i = 0; i < burguers.length; i++) {
-    if (frames > 2000) {
+    if (frames > 1500) {
       burguers[i].speed = 10;
     }
     burguers[i].drawBurguer();
