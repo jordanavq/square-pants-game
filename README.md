@@ -20,8 +20,6 @@ _Let´s play!_
 
 Clique [AQUI](https://jordanavq.github.io/square-pants-game/) para jogar!
 
-## **Link da apresentação**
-
 # **Square Pants Game**
 
 Sponge Bob is hungry and he´s passionate about burgers, so let´s help him on this adventure?
@@ -45,5 +43,3 @@ Let's play!
 ## **Game Link**
 
 Click [HERE](https://jordanavq.github.io/square-pants-game/) to play!
-
-## **Presentation link**
