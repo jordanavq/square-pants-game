@@ -13,11 +13,11 @@ body {
 }
 
 .game-intro {
-  display: block;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   padding: 0% 10%;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #ffd700;
